@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Neuron Cell Structure by ChiaraBicchielli</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Neuron Cell Structure</h1>
+          <h2>A 3D model of neuron cell structure in Plasm.js</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/ChiaraBicchielli/finalproject/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/ChiaraBicchielli/finalproject/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/ChiaraBicchielli/finalproject" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>Introduction</h1>
+
+<p>The human body is composed of 100 trillion cells, of which 100 billion cells are neurons. Brain cells last a lifetime (not reformed), but we lose about 500 per hour!
+The central part of the neuron, called soma, contain the nucleus and other organelles that carry out important cellular functions (Golgi apparatus, mitochondria, smooth and rough endoplasmic reticulum, lysosomes). From the cell body have origin  cytoplasmic extensions, called neurites, which are the dendrites and axon.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/cell_1.jpeg?raw=true" alt="cell"></p>
+
+<h1>Preparation work</h1>
+
+<p>The preparation work of the project began with an analysis of the neuron cell's structure. Secondly, we chose to use the tools <a href="https://github.com/cvdlab-bio/web3d">Web3D</a> developed by the colleagues of Biomedical Informatics. Using this tool, you can create 2D and 3D models from DICOM images.<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/web3D.png?raw=true" alt="web3D"> Regarding this project, has not made use of DICOM images, but a draft of cell drawn free-hand. The freehand drawing has involved a study of the proportions between individual organelles that make up the cell and the cell itself.<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/cell_draw.jpg?raw=true" alt="draw">The project was designed by me and my colleague <a href="http://noemibiancone.github.com/finalproject">Noemi Biancone</a>. The design an implementation part was evenly divided between the two of us. The main difficulty encountered was that due to the fact of being able to create a 3D model from a 2D image, this problem has been solved by a process of abstraction, capable of imagining the right forms and proportions of the model.</p>
+
+<h1>Project structure</h1>
+
+<h2>Nucleus, Nucleolus, and Rough Endoplasmic Reticulum</h2>
+
+<p>The nucleus is the cell's control center, mainly contains chromatin, a granural material composed of DNA, the cell's genetic material and proteins. Inside the nucleus there is a small structure called nucleolus that play an important role in ribosome production. The Nucleus is wrapped by the rough Endoplasmic Reticulum that is involved in the synthesis of proteins and is also a membrane factory for the cell.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Rought_Reticulum.png?raw=true" alt="nucleos_roughtRet">
+The Nucleus is represented through the use of the function ROTATIONAL_SURFACE, the input that is given to the function (which creates a rotational surface using the z-axis as the axis of rotation) is a semicircle represented by a Bezier curve of a first degree. The same operation is done for the Nucleolus.
+The rough endoplasmic reticulum, due to its complexity, is divided into parts and numbered (see hand-drawn).Each part is composed by surfaces that are represented by the function COONS_PATCH; the inputs that are given to the function: two transfinite non-uniform B-Spline (created by the function NUBS) and 2 Bezier's curves.</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/RoughEndoplasmicReticulum_Nucleus_Nucleolus.js">View code</a></p>
+
+<h2>Smooth Endoplasmic Reticulum</h2>
+
+<p>The smooth endoplasmic reticulum has functions in several metabolic processes, including synthesis of lipids and steroids, metabolism of carbohydrates, regulation of calcium concentration, drug detoxification, attachment of receptors on cell membrane proteins, and steroid metabolism.It is connected to the rough Endoplasmic Reticulum and consequently to the nuclear envelope.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Smooth_Reticulum.png?raw=true" alt="smooth">
+The structure of this organelle is composed of non-regular cylindrical surfaces connected to each other. Every surface is created through the use of the function BEZIER, which has as input the control curves generate by the function NUBS (transfinite Non-uniform B-spline).</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/SmoothEndoplasmicReticulum.js">View code</a></p>
+
+<h2>Mitochondrion</h2>
+
+<p>This structure produces a substanc called adenosine triphosphate, which is the carrier of energy cells. The organelle is composed of compartments that carry out specialized functions. These compartments or regions include the outer membrane, the intermembrane space, the inner membrane, and the cristae.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Mitochondrion_inner.png?raw=true" alt="mit-inner">
+Given the complexity of the inner membrane composed of cristae, the internal volume is divided into two parts. For the creation of each of which is used the function COONS_PATCH;  the inputs that are given to the function: two transfinite non-uniform B-Spline (created by the function NUBS) and two Bezier's curves.</p>
+
+<p><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Mitochondrion.png?raw=true" alt="mithocondrion">
+This structure is coated by an external volume generate by the function BEZIER which has as input of the control curves (transfinite non-uniform B-Spline).</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/Mitochondrion.js">View code</a></p>
+
+<h2>Centriole</h2>
+
+<p>Centrioles are involved in the organization of the mitotic spindle and in the completion of cytokinesis. Centrioles were previously thought to be required for the formation of a mitotic spindle in animal cells.
+A centriole is a cylindrically-shaped cell structure.The cylindrical shape mirrors the structure: the centriole is in fact composed of nine triplets of short microtubules parallel, located peripherally in an arrangement pararadiale, in such a way as to constitute in cross-section a turbine pattern.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Centriole.png?raw=true" alt="centriole">
+The single microtubule is created through the representation of the circumferences of the bases of the cylinders (external and internal), then give as input to the function BEZIER. The surface controlled  by the two concentric cylinders is created through the function BEZIER. This structure is replicated three times for each triplet. Are also generated the arms that connect the triplets through the function POLYLINE.</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/Centriole.js">View code</a></p>
+
+<h2>Lysosomes and Vacuole</h2>
+
+<p>Lysosomes are cellular organelles that contain acid hydrolase enzymes that degrade dangerous materials taken into the cell, such as bacteria. They can be described as the stomach of the cell. The vacuole is a sac that trasport and store ingested materials, waste products and water.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Vacuole_Lysosome.png?raw=true" alt="lysosomes">
+The organelle's volume is generated by the function of BEZIER which has as input of the control curves (transfinite non-uniform B-Spline).</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/Lisosomes_Vacuole.js">View code</a></p>
+
+<h2>Cell Membrane, Axon and Dendrites</h2>
+
+<p>The membrane encloses the content of the cell and regulates the flow of substance into and out of the cell. Nerve cells have axons along which nerve signals are dispatched, they are in effect the primary transmission lines of the nervous system.Dendrites are the branched projections of a neuron that act to conduct the electrochemical stimulation received from other neural cells to the cell body, or soma, of the neuron from which the dendrites project.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Membrane_Axon_Dendriti.png?raw=true" alt="membrane-axon-dendriti">
+The membrane's volume is generated by the function of BEZIER which has as input of the control curves (transfinite non-uniform B-Spline). Each dendrite is created by function NUBS and BEZIER.</p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/SingleElements/CellMembrane_Axon_Dendrites.js">View code</a></p>
+
+<h1>Final Result</h1>
+
+<p>After each developed individual organelles, my colleague and I we went over the "puzzle" and after the necessary adjustments ("My God, how is it possible that the lysosome is inside the centriole??") this is the end result.
+<img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale1.png?raw=true" alt="fin1"><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale6.png?raw=true" alt="fin6"><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale2.png?raw=true" alt="fin2"><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale3.png?raw=true" alt="fin3"><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale4.png?raw=true" alt="fin4"><img src="https://github.com/ChiaraBicchielli/finalproject/blob/master/images/Totale5.png?raw=true" alt="fin5"></p>
+
+<p><a href="https://github.com/ChiaraBicchielli/finalproject/blob/master/final-project-total-byBicchielli-Biancone.js">View code</a></p>
+
+<ul>
+<li>Some content in this site (including text and images) are taken from the web and belong to their respective owners.</li>
+<li>All information about Plasm.js can be found <a href="http://github.com/cvdlab/plasm.js">here</a>
+</li>
+</ul>
+        </section>
+
+        <footer>
+          Neuron Cell Structure is maintained by <a href="https://github.com/ChiaraBicchielli">ChiaraBicchielli</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
